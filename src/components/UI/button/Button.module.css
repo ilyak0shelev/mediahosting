@@ -1,0 +1,32 @@
+.MyBtn {
+    padding: 5px 10px;
+    margin: 0px 3px;
+    border-radius: 5px;
+    background: transparent;
+    color:black;
+    border: 2px solid rgba(176, 135, 214, 0.342);
+    cursor: pointer;
+    background-color: rgba(176, 135, 214, 0.342);
+    transition: .1s linear;
+}
+
+.MyBtn:hover {
+    background-color: rgba(178, 120, 228, 0.342);
+}
+
+.MyBtn:active {
+    background-color: rgba(160, 93, 218, 0.342);
+    transform: translate(2px);
+}
+
+@media (min-width: 1100px) and (max-width: 1300px) {
+    .MyBtn {
+        font-size: 0.8em;
+    }
+}
+
+@media (max-width: 1100px) {
+    .MyBtn {
+        font-size: 0.6em;
+    }
+}

@@ -1,0 +1,75 @@
+.header {
+    padding: 10px 10px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 55px;
+    border-bottom: 1px solid rgba(176, 135, 214, 0.342);
+    flex-flow: row nowrap;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    flex-flow: row nowrap;
+    width: 35px;
+    height: 35px;
+    padding-right: 10px;
+}
+
+.SearchForm {
+    width: 70%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+#search-input {
+    font-size: 90%;
+    padding: 3px 10px;
+    padding-right: 0;
+    height: 100%;
+    width: 80%;
+    border: none;
+    border-radius: 10px 0px 0px 10px;
+    background-color: rgba(176, 135, 214, 0.342);
+    border: 2px solid rgba(176, 135, 214, 0.342);
+    border-right: none;
+    transition: 0.2s linear;
+}
+
+#search-input:focus {
+    background-color: transparent;
+    width: 100%;
+    outline: none;
+    border-color: rgba(176, 135, 214, 0.5);
+}
+
+#search-input:focus ~ #search-btn {
+    background-color: transparent;
+    outline: none;
+    border-color: rgba(176, 135, 214, 0.5);
+}
+
+#search-btn {
+    margin-left: 0;
+    border-radius: 0px 10px 10px 0px;
+    background-color: rgba(176, 135, 214, 0.342);
+    border-left: none;
+    transform: none;
+}
+
+#search-btn::before {
+    content: "\f002";
+    font: normal normal normal 15px/1 FontAwesome;
+}
+
+.profileBar {
+    display: flex;
+    justify-content: space-between;
+    flex-flow: row nowrap;
+}
+
+#newPostBtn::before {
+    content: "\f067";
+    font: normal normal normal 15px/1 FontAwesome;
+}
