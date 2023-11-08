@@ -12,7 +12,7 @@ export const SearchBar = () => {
 
     return (
         <form className='SearchForm' action='' method='get'>
-            <input value={data} onChange={(event) => setData(event.target.value)} id='search-input' type="text" placeholder="Search..." />
+            <input value={data} onChange={(event) => setData(event.target.value)} id='search-input' type="text" placeholder="Найти..." />
             <Button id='search-btn' type='submit' onClick={addSearchReq}></Button>
         </form>
     )

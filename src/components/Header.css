@@ -10,11 +10,25 @@
 
 .logo {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     flex-flow: row nowrap;
-    width: 35px;
-    height: 35px;
+    /* width: 35px;
+    height: 35px; */
     padding-right: 10px;
+}
+
+#nameCont {
+    padding-left: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+}
+
+@media (max-width: 900px) {
+    #projectName {
+        display: none;
+    }
 }
 
 .SearchForm {
@@ -30,7 +44,7 @@
     height: 100%;
     width: 80%;
     border: none;
-    border-radius: 10px 0px 0px 10px;
+    border-radius: 12px 0px 0px 12px;
     background-color: rgba(176, 135, 214, 0.342);
     border: 2px solid rgba(176, 135, 214, 0.342);
     border-right: none;
@@ -52,7 +66,7 @@
 
 #search-btn {
     margin-left: 0;
-    border-radius: 0px 10px 10px 0px;
+    border-radius: 0px 12px 12px 0px;
     background-color: rgba(176, 135, 214, 0.342);
     border-left: none;
     transform: none;
