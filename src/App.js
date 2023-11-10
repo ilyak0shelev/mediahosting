@@ -3,15 +3,16 @@ import Header from './components/Header';
 import "./styles/App.css"
 import { PageProvider } from './components/contexts/PageContext';
 import LoginWindow from './components/LoginWindow';
-import RegWindow from './components/RegWindow';
+import { AuthWindowProvider } from './components/contexts/AuthWindowContext';
 
 function App() {
     return (
         <div className="App">
             <PageProvider>
-                <Header />
-                <LoginWindow/>
-                <RegWindow/>
+                <AuthWindowProvider>
+                    <Header />
+                    <LoginWindow />
+                </AuthWindowProvider>
             </PageProvider>
         </div>
     );
