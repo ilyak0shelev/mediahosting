@@ -8,12 +8,12 @@ export const ProfileBar = () => {
   const visibility = useContext(AuthWindowContext)
 
   const loginClicker = () => {
-    value.changeActive('LoginWindow')
+    value.changeActive('LoginWindowActive')
     visibility.changeAuthVisibility('')
   }
 
   const regClicker = () => {
-    value.changeActive('RegWindow')
+    value.changeActive('RegWindowActive')
     visibility.changeAuthVisibility('')
   }
 

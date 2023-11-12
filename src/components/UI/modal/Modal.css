@@ -20,7 +20,7 @@
 .modal__content {
     width: 400px;
     height: 60%;
-    padding: 20px;
+    padding: 1%;
     border:  1px solid rgba(176, 135, 214, 0.342);
     box-shadow: 0 0 15px -2px rgba(176, 135, 214, 0.342);
     border-radius: 20px;
@@ -48,5 +48,11 @@
 @media (max-width: 900px) {
     .modal__content {
         width: 350px;
+    }
+}
+
+@media (max-height: 500px) {
+    .modal__content {
+        height: 80%;
     }
 }
