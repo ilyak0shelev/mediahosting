@@ -3,7 +3,7 @@ import "./Modal.css"
 import { PageContext } from '../../contexts/PageContext'
 import { AuthWindowContext } from '../../contexts/AuthWindowContext'
 
-const Modal = ({ children }) => {
+const Modal = ({ children, clearNickAuth, clearPswdAuth, clearNickReg, clearPwsdReg, clearPwsdRegRpt }) => {
 
   const value = useContext(PageContext)
   const visibility = useContext(AuthWindowContext)
@@ -11,9 +11,13 @@ const Modal = ({ children }) => {
   const handlerClicker = () => {
     value.changeActive('null')
     visibility.changeAuthVisibility('inactive')
+    clearNickAuth('')
+    clearPswdAuth('')
+    clearNickReg('')
+    clearPwsdReg('')
+    clearPwsdRegRpt('')
   }
-
-
+  
   return (
     <div className={`modal ${visibility.authVisibility}`} onClick={handlerClicker}>
       <div className={`modal__content ${visibility.authVisibility}`} onClick={e => e.stopPropagation()}>

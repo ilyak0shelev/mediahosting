@@ -6,6 +6,7 @@ import LoginWindow from './components/LoginWindow';
 import { AuthWindowProvider } from './components/contexts/AuthWindowContext';
 
 function App() {
+
     return (
         <div className="App">
             <PageProvider>

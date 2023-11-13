@@ -18,7 +18,7 @@
 }
 
 .modal__content {
-    width: 400px;
+    width: 420px;
     height: 60%;
     padding: 1%;
     border:  1px solid rgba(176, 135, 214, 0.342);
@@ -41,7 +41,7 @@
 @media (max-width: 1100px) {
     .modal__content {
         font-size: 0.8em;
-        width: 400px;
+        width: 380px;
     }
 }
 

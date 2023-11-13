@@ -84,7 +84,7 @@
     width: 100%;
 }
 
-.loginCont.RegWindowActive {
+.loginCont {
     display: none;    
 }
 
@@ -97,7 +97,7 @@
     width: 100%;
 }
 
-.regCont.LoginWindowActive {
+.regCont {
     display: none;
 }
 
@@ -194,5 +194,4 @@
     content: "\f00d";
     font: normal normal normal 15px/1 FontAwesome;
 }
-
 
