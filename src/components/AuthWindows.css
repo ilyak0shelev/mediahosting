@@ -149,6 +149,36 @@
     letter-spacing: 1px;
 }
 
+.nickInfo::before {
+    content: '\f0eb';
+    font: normal normal normal 15px/1 FontAwesome;
+    margin-right: 4px;
+}
+
+.nickInfo:hover::before {
+    background-color: rgba(216, 216, 92, 0.733);
+    box-shadow: 0px 0px 10px 5px rgba(216, 216, 92, 0.733);
+
+}
+
+.nickInfo:active::before {
+    background-color: rgb(206, 206, 8);
+    box-shadow: 0px 0px 10px 5px rgb(206, 206, 8);
+}
+
+.nickInfo:active::after {
+    padding: 1%;
+    position: absolute;
+    right: 30%;
+    width: 200px;
+    text-align: left;
+    content: attr(title);
+    border: 2px solid rgba(176, 135, 214, 0.45);
+    border-radius: 12px;
+    background-color: aliceblue;
+
+}
+
 .fa.fa-eye, .fa.fa-eye-slash {
     cursor: pointer;
 }
