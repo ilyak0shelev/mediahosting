@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Modal from "./UI/modal/Modal";
 import { PageContext } from "./contexts/PageContext";
 import Button from "./UI/button/Button";
@@ -30,7 +30,44 @@ const LoginWindow = () => {
     const [pswdRegError, setPswdRegError] = useState('Заполните поле!')
     const [pswdRptError, setPswdRptError] = useState('Заполните поле!')
 
-        
+    const [loginFormValid, setLoginFormValid] = useState(false)
+    const [regFormValid, setRegFormValid] = useState(false)
+
+    useEffect(() => {
+        if (visibility.authVisibility === 'inactive') {
+            setNickAuthValue('')
+            setPswdAuthValue('')
+            setNickRegValue('')
+            setPswdRegValue('')
+            setPswdRptValue('')
+            setNickAuthError('Заполните поле!')
+            setPswdAuthError('Заполните поле!')
+            setNickRegError('Заполните поле!')
+            setPswdRegError('Заполните поле!')
+            setPswdRptError('Заполните поле!')
+            setNickAuthDirty(false)
+            setPswdAuthDirty(false)
+            setNickRegDirty(false)
+            setPswdRegDirty(false)
+            setPswdRptDirty(false)
+        }
+    }, [visibility.authVisibility])
+
+    useEffect(() => {
+        if (nickAuthError || pswdAuthError) {
+            setLoginFormValid(false)
+        } else {
+            setLoginFormValid(true)
+        }
+    }, [nickAuthError, pswdAuthError])
+
+    useEffect(() => {
+        if (nickRegError || pswdRegError || pswdRptError) {
+            setRegFormValid(false)
+        } else {
+            setRegFormValid(true)
+        }
+    }, [nickRegError, pswdRegError, pswdRptError])
 
     const toggleInputType = () => {
         if (type === 'password') {
@@ -42,6 +79,72 @@ const LoginWindow = () => {
             setIcon('fa fa-eye-slash')
         }
     }
+
+    const nickAuthHandler = (e) => {
+        const re = /^[a-zA-Z][a-zA-Z0-9_.,-]{5,31}$/
+        if(!re.test(String(e.target.value).toLowerCase())) {
+            setNickAuthError('Никнейм некорректный!')
+            if (!e.target.value) {
+                setNickAuthError('Заполните поле!')
+            }
+        } else {
+            setNickAuthError('')
+        }
+    }
+
+    const nickRegHandler = (e) => {
+        const re = /^[a-zA-Z][a-zA-Z0-9_-]{5,31}$/
+        if(!re.test(String(e.target.value).toLowerCase())) {
+            setNickRegError('Никнейм некорректный!')
+            if (!e.target.value) {
+                setNickRegError('Заполните поле!')
+            }
+        } else {
+            setNickRegError('')
+        }
+    }
+
+    const pswdAuthHandler = (e) => {
+        const re = /^(?=.*\d)\w{4,20}$/
+        if(!re.test(String(e.target.value).toLowerCase())) {
+            setPswdAuthError('Пароль должен быть длиной 4-20 символов и содержать хотя бы одну цифру!')
+            if (!e.target.value) {
+                setPswdAuthError('Заполните поле!')
+            }
+        } else {
+            setPswdAuthError('')
+        }
+    }
+
+    const pswdRegHandler = (e) => {
+        if (e.target.value !== pswdRptValue) {
+            setPswdRptError('Пароли не совпадают!')
+        } else {
+            setPswdRptError('')
+        }
+
+        const re = /^(?=.*\d)\w{4,20}$/
+        if(!re.test(String(e.target.value).toLowerCase())) {
+            setPswdRegError('Пароль должен быть длиной 4-20 символов и содержать хотя бы одну цифру!')
+            if (!e.target.value) {
+                setPswdRegError('Заполните поле!')
+            }
+        } else {
+            setPswdRegError('')
+        }
+    }
+
+    const pswdRptHandler = (e) => {
+        if(e.target.value !== pswdRegValue) {
+            setPswdRptError('Пароли не совпадают!')
+            if (!e.target.value) {
+                setPswdRptError('Заполните поле!')
+            }
+        } else {
+            setPswdRptError('')
+        }
+    }
+
 
     const blurHandler = (e) => {
         switch (e.target.name) {
@@ -65,14 +168,9 @@ const LoginWindow = () => {
         }
     }
 
-    const closeBtnClicked = () => {
+    const closeWindow = () => {
         value.changeActive('null')
         visibility.changeAuthVisibility("inactive")
-        setNickAuthValue('')
-        setPswdAuthValue('')
-        setNickRegValue('')
-        setPswdRegValue('')
-        setPswdRptValue('')
     }
 
     const login = (event) => {
@@ -93,7 +191,7 @@ const LoginWindow = () => {
 
 
     return (
-        <Modal clearNickAuth={setNickAuthValue} clearPswdAuth={setPswdAuthValue} clearNickReg={setNickRegValue} clearPwsdReg={setPswdRegValue} clearPwsdRegRpt={setPswdRptValue}>
+        <Modal>
             <div className="windowCont">
                 <div className="btnGroup">
                     <Button id={`login-window-btn-${value.active}`} onClick={() => value.changeActive('LoginWindowActive')}>Вход</Button>
@@ -105,17 +203,21 @@ const LoginWindow = () => {
                             <h1 className="welcomeLabel">Добро пожаловать!</h1>
                             <div className="inputGroup">
                                 <div className="nickGroup">
-                                    <input value={nickAuthValue} onChange={(e) => setNickAuthValue(e.target.value)} onBlur={blurHandler} name="authNickInput" className="nickInput" type='text' placeholder="Введите ваш никнейм..."></input>
+                                    <input value={nickAuthValue} onChange={(e) => {setNickAuthValue(e.target.value); nickAuthHandler(e)}} onBlur={blurHandler} name="authNickInput" className="nickInput" type='text' placeholder="Введите ваш никнейм..."></input>
+                                    <span className="nickInfo" title="Разрешены: A-Z 0-9 _ -
+                                                                      Никнейм должен начинаться с латинского символа
+                                                                      Длина: от 6 до 32 символов">
+                                    </span>
                                 </div>
-                                {(nickAuthDirty && nickAuthError) && <h1 style={{fontSize: "14px", color:"rgba(218, 73, 73, 1)", justifyContent:"left"}}>{nickAuthError}</h1>}
+                                {(nickAuthDirty && nickAuthError) && <h1 style={{fontSize: "12px", color:"rgba(218, 73, 73, 1)"}}>{nickAuthError}</h1>}
                                 <div className="pswdGroup">
-                                    <input value={pswdAuthValue} onChange={(e) => setPswdAuthValue(e.target.value)} onBlur={blurHandler} name="authPswdInput" className="pswdInput" type={type} placeholder="Введите пароль..."></input>
+                                    <input value={pswdAuthValue} onChange={(e) => {setPswdAuthValue(e.target.value); pswdAuthHandler(e)}} onBlur={blurHandler} name="authPswdInput" className="pswdInput" type={type} placeholder="Введите пароль..."></input>
                                     <span onClick={toggleInputType} className={`${icon}`}></span>
                                 </div>
-                                {(pswdAuthDirty && pswdAuthError) && <h1 style={{fontSize: "14px", color:"rgba(218, 73, 73, 1)", justifyContent:"left"}}>{pswdAuthError}</h1>}
+                                {(pswdAuthDirty && pswdAuthError) && <h1 style={{fontSize: "12px", color:"rgba(218, 73, 73, 1)"}}>{pswdAuthError}</h1>}
                             </div>
                             <div className="submitGroup">
-                                <Button id='login-btn' type='submit'>
+                                <Button disabled={!loginFormValid} id='login-btn' type='submit'>
                                     Войти
                                 </Button>
                             </div>
@@ -126,21 +228,25 @@ const LoginWindow = () => {
                             <h1 className="welcomeLabel">Добро пожаловать!</h1>
                             <div className="inputGroup">
                                 <div className="nickGroup">
-                                    <input value={nickRegValue} onChange={(e) => setNickRegValue(e.target.value)} onBlur={blurHandler} name="regNickInput" className="nickInput" type='text' placeholder="Введите ваш никнейм..."></input>
+                                    <input value={nickRegValue} onChange={(e) => {setNickRegValue(e.target.value); nickRegHandler(e)}} onBlur={blurHandler} name="regNickInput" className="nickInput" type='text' placeholder="Введите ваш никнейм..."></input>
+                                    <span className="nickInfo" title="Разрешены: A-Z 0-9 _ -
+                                                                      Никнейм должен начинаться с латинского символа
+                                                                      Длина: от 6 до 32 символов">
+                                    </span>
                                 </div>
-                                {(nickRegDirty && nickRegError) && <h1 style={{fontSize: "14px", color:"rgba(218, 73, 73, 1)", justifyContent:"left"}}>{nickRegError}</h1>}
+                                {(nickRegDirty && nickRegError) && <h1 style={{fontSize: "12px", color:"rgba(218, 73, 73, 1)"}}>{nickRegError}</h1>}
                                 <div className="pswdGroup">
-                                    <input value={pswdRegValue} onChange={(e) => setPswdRegValue(e.target.value)} onBlur={blurHandler} name="regPswdInput" className="pswdInput" type={type} placeholder="Введите пароль..."></input>
+                                    <input value={pswdRegValue} onChange={(e) => {setPswdRegValue(e.target.value); pswdRegHandler(e)}} onBlur={blurHandler} name="regPswdInput" className="pswdInput" type={type} placeholder="Введите пароль..."></input>
                                     <span onClick={toggleInputType} className={`${icon}`}></span>
                                 </div>
-                                {(pswdRegDirty && pswdRegError) && <h1 style={{fontSize: "14px", color:"rgba(218, 73, 73, 1)", justifyContent:"left"}}>{pswdRegError}</h1>}
+                                {(pswdRegDirty && pswdRegError) && <h1 style={{fontSize: "12px", color:"rgba(218, 73, 73, 1)"}}>{pswdRegError}</h1>}
                                 <div className="pswdRepeatGroup">
-                                    <input value={pswdRptValue} onChange={(e) => setPswdRptValue(e.target.value)} onBlur={blurHandler} name="regPswdRptInput" className="pswdInput" type={type} placeholder="Повторите пароль..."></input>
+                                    <input value={pswdRptValue} onChange={(e) => {setPswdRptValue(e.target.value); pswdRptHandler(e)}} onBlur={blurHandler} name="regPswdRptInput" className="pswdInput" type={type} placeholder="Повторите пароль..."></input>
                                 </div>
-                                {(pswdRptDirty && pswdRptError) && <h1 style={{fontSize: "14px", color:"rgba(218, 73, 73, 1)", justifyContent:"left"}}>{pswdRptError}</h1>}
+                                {(pswdRptDirty && pswdRptError) && <h1 style={{fontSize: "12px", color:"rgba(218, 73, 73, 1)"}}>{pswdRptError}</h1>}
                             </div>
                             <div className="submitGroup">
-                                <Button id='reg-btn' type='submit'>
+                                <Button disabled={!regFormValid} id='reg-btn' type='submit'>
                                     Создать аккаунт
                                 </Button>
                             </div>
@@ -149,7 +255,7 @@ const LoginWindow = () => {
                 </div>
             </div>
             <div className="closeBtnCont">
-                    <Button onClick={closeBtnClicked} id="close-btn"></Button>
+                    <Button onClick={closeWindow} id="close-btn"></Button>
                 </div>
         </Modal>
     )
