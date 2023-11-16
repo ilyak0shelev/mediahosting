@@ -12,7 +12,6 @@ const start = () => {
         mongoose.connect(`mongodb+srv://admin:cYHpzm6K3Ooi@cluster0.q13jkdo.mongodb.net/user_data?retryWrites=true&w=majority`)
         .then((res) => console.log("MongoDB connected!"))
         .catch((error) => console.log(error))
-        
         app.listen(port, () => console.log(`Listening on port ${port}`));
     }
 

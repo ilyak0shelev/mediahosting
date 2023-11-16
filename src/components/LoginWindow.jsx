@@ -35,6 +35,7 @@ const LoginWindow = () => {
 
     useEffect(() => {
         if (visibility.authVisibility === 'inactive') {
+            value.changeActive(null)
             setNickAuthValue('')
             setPswdAuthValue('')
             setNickRegValue('')
@@ -50,8 +51,10 @@ const LoginWindow = () => {
             setNickRegDirty(false)
             setPswdRegDirty(false)
             setPswdRptDirty(false)
+            setIcon('fa fa-eye-slash')
+            setType('password')
         }
-    }, [visibility.authVisibility])
+    }, [visibility.authVisibility, value])
 
     useEffect(() => {
         if (nickAuthError || pswdAuthError) {
@@ -81,7 +84,7 @@ const LoginWindow = () => {
     }
 
     const nickAuthHandler = (e) => {
-        const re = /^[a-zA-Z][a-zA-Z0-9_.,-]{5,31}$/
+        const re = /^[a-zA-Z][a-zA-Z0-9_-]{5,31}$/
         if(!re.test(String(e.target.value).toLowerCase())) {
             setNickAuthError('Никнейм некорректный!')
             if (!e.target.value) {
@@ -169,29 +172,52 @@ const LoginWindow = () => {
     }
 
     const closeWindow = () => {
-        value.changeActive('null')
-        visibility.changeAuthVisibility("inactive")
+        value.changeActive(null)
+        visibility.changeAuthVisibility('inactive')
     }
 
     const login = (event) => {
         event.preventDefault()
         axios.post("/auth/login", {'nickname':event.target.authNickInput.value, 'pswd': event.target.authPswdInput.value})
         .then((res) => {
-
+            switch (res.data) {
+                case 'Success':
+                    console.log('Success!')
+                    break
+                case 'Incorrect password':
+                    setPswdAuthError('Неправильный пароль!')
+                    break
+                case 'No matches':
+                    setNickAuthError('Аккаунт не найден!')
+                    break
+                default:
+                    break
+            }
+        })
+        .catch((res) => {
+            console.log(res)
         })
     }
 
     const registration = (event) => {
         event.preventDefault()
-        axios.post("/auth/registration", {'nickname':event.target.regNickInput.value, 'pswd': event.target.regPswdInput.value, 'pswdRepeat': event.target.regPswdRptInput.value})
+        axios.post("/auth/registration", {'nickname':event.target.regNickInput.value, 'pswd': event.target.regPswdInput.value})
         .then((res) => {
-
+            switch (res.data) {
+                case 'Success':
+                    console.log('Success')
+                    break
+                case 'User exists':
+                    setNickRegError('Аккаунт уже существует!')
+                    break
+                default:
+                    break
+            }
         })
     }
 
-
     return (
-        <Modal>
+        <Modal visibility={visibility.authVisibility} changeVisibility={visibility.changeAuthVisibility}>
             <div className="windowCont">
                 <div className="btnGroup">
                     <Button id={`login-window-btn-${value.active}`} onClick={() => value.changeActive('LoginWindowActive')}>Вход</Button>
@@ -255,8 +281,8 @@ const LoginWindow = () => {
                 </div>
             </div>
             <div className="closeBtnCont">
-                    <Button onClick={closeWindow} id="close-btn"></Button>
-                </div>
+                <Button onClick={closeWindow} id="close-btn"></Button>
+            </div>
         </Modal>
     )
 }
