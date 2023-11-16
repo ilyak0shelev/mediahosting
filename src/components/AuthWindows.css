@@ -75,6 +75,14 @@
     border-radius: 0 12px 12px 0;
 }
 
+#login-window-btn-null {
+    display: none;
+}
+
+#reg-window-btn-null {
+    display: none;
+}
+
 .loginCont.LoginWindowActive {
     display: flex;
     justify-content:center;

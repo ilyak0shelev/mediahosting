@@ -1,21 +1,19 @@
 import React, { useContext } from 'react'
 import "./Modal.css"
 import { PageContext } from '../../contexts/PageContext'
-import { AuthWindowContext } from '../../contexts/AuthWindowContext'
 
-const Modal = ({ children }) => {
+const Modal = ({ children, visibility, changeVisibility }) => {
 
   const value = useContext(PageContext)
-  const visibility = useContext(AuthWindowContext)
 
   const handlerClicker = () => {
-    value.changeActive('null')
-    visibility.changeAuthVisibility('inactive')
+    value.changeActive(null)
+    changeVisibility('inactive')
   }
   
   return (
-    <div className={`modal ${visibility.authVisibility}`} onClick={handlerClicker}>
-      <div className={`modal__content ${visibility.authVisibility}`} onClick={e => e.stopPropagation()}>
+    <div className={`modal ${visibility}`} onClick={handlerClicker}>
+      <div className={`modal__content ${visibility}`} onClick={e => e.stopPropagation()}>
         {children}
       </div>
     </div>
