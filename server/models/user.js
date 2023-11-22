@@ -6,7 +6,7 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    pswd: {
+    hashPswd: {
         type: String,
         required: true
     }

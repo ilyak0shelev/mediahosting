@@ -3,7 +3,7 @@ const app = express();
 const authRouter = require('./authRouter')
 const port = process.env.PORT || 5000
 const mongoose = require('mongoose')
-const User = require('./models/user')
+
 
 app.use(express.json())
 app.use("/auth", authRouter)
@@ -16,4 +16,3 @@ const start = () => {
     }
 
 start()
-
