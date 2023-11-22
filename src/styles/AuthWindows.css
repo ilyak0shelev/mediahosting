@@ -212,7 +212,7 @@
 
 #close-btn {
     background-color: transparent;
-    border: 1px solid transparent;
+    border: 2px solid transparent;
     transition: 0.2s;
     border-radius: 15px;
     width: 100%;
@@ -220,12 +220,12 @@
 
 #close-btn:hover {
     background-color: rgba(224, 83, 83, 0.8);
-    border: 1px solid rgba(218, 73, 73, 0.8);
+    border: 2px solid rgba(218, 73, 73, 0.8);
 }
 
 #close-btn:active {
     background-color: rgba(224, 83, 83, 1);
-    border: 1px solid rgba(218, 73, 73, 1);
+    border: 2px solid rgba(218, 73, 73, 1);
 }
 
 #close-btn::before {

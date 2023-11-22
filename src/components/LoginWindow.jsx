@@ -2,13 +2,16 @@ import React, { useContext, useState, useEffect } from "react";
 import Modal from "./UI/modal/Modal";
 import { PageContext } from "./contexts/PageContext";
 import Button from "./UI/button/Button";
-import "./AuthWindows.css"
+import "../styles/AuthWindows.css"
 import { AuthWindowContext } from "./contexts/AuthWindowContext";
 import axios from "axios";
+import { AuthStatusContext } from "./contexts/AuthStatusContext";
 
 const LoginWindow = () => {
     const value = useContext(PageContext)
     const visibility = useContext(AuthWindowContext)
+    const session_status = useContext(AuthStatusContext)
+
     const [type, setType] = useState('password')
     const [icon, setIcon] = useState('fa fa-eye-slash')
 
@@ -182,7 +185,8 @@ const LoginWindow = () => {
         .then((res) => {
             switch (res.data) {
                 case 'Success':
-                    console.log('Success!')
+                    session_status.changeAuthStatus(true)
+                    closeWindow()
                     break
                 case 'Incorrect password':
                     setPswdAuthError('Неправильный пароль!')
@@ -205,7 +209,8 @@ const LoginWindow = () => {
         .then((res) => {
             switch (res.data) {
                 case 'Success':
-                    console.log('Success')
+                    session_status.changeAuthStatus(true)
+                    closeWindow()
                     break
                 case 'User exists':
                     setNickRegError('Аккаунт уже существует!')
@@ -225,7 +230,7 @@ const LoginWindow = () => {
                 </div>
                 <div className="contentCont">
                     <div className={`loginCont ${value.active}`}>
-                        <form className="MainForm" onSubmit={login} method='post'>
+                        <form className="MainForm" onSubmit={login} action='' method='post'>
                             <h1 className="welcomeLabel">Добро пожаловать!</h1>
                             <div className="inputGroup">
                                 <div className="nickGroup">

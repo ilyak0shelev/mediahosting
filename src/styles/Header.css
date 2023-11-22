@@ -77,6 +77,12 @@
     font: normal normal normal 15px/1 FontAwesome;
 }
 
+.profileCont {
+    display: flex;
+    justify-content: space-between;
+    flex-flow: row nowrap;
+}
+
 .profileBar {
     display: flex;
     justify-content: space-between;
@@ -86,4 +92,14 @@
 #newPostBtn::before {
     content: "\f067";
     font: normal normal normal 15px/1 FontAwesome;
+}
+
+#logoutBtn {
+    background-color: rgba(224, 83, 83, 0.8);
+    border: 2px solid rgba(218, 73, 73, 0.8);
+}
+
+#logoutBtn:active {
+    background-color: rgba(224, 83, 83, 1);
+    border: 2px solid rgba(218, 73, 73, 1);
 }

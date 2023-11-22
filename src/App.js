@@ -4,17 +4,21 @@ import "./styles/App.css"
 import { PageProvider } from './components/contexts/PageContext';
 import LoginWindow from './components/LoginWindow';
 import { AuthWindowProvider } from './components/contexts/AuthWindowContext';
+import { AuthStatusProvider} from './components/contexts/AuthStatusContext';
+import SessionChecker from './components/SessionChecker';
 
 function App() {
-
     return (
         <div className="App">
-            <PageProvider>
-                <AuthWindowProvider>
-                    <Header />
-                    <LoginWindow />
-                </AuthWindowProvider>
-            </PageProvider>
+            <AuthStatusProvider>
+                <PageProvider>
+                    <AuthWindowProvider>
+                        <SessionChecker />
+                        <Header />
+                        <LoginWindow />
+                    </AuthWindowProvider>
+                </PageProvider>
+            </AuthStatusProvider>
         </div>
     );
 }

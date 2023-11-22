@@ -1,7 +1,7 @@
 import React from 'react'
 import ProfileBar from './ProfileBar'
 import SearchBar from './SearchBar'
-import "./Header.css"
+import "../styles/Header.css"
 
 const Header = () => {
     return (
