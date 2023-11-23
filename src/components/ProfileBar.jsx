@@ -3,21 +3,24 @@ import Button from './UI/button/Button'
 import { PageContext } from './contexts/PageContext'
 import { AuthWindowContext } from './contexts/AuthWindowContext'
 import { AuthStatusContext } from './contexts/AuthStatusContext'
+import { Link, useNavigate } from 'react-router-dom'
+
 import axios from 'axios'
 
 export const ProfileBar = () => {
   const value = useContext(PageContext)
-  const visibility = useContext(AuthWindowContext)
+  const auth_visibility = useContext(AuthWindowContext)
   const session_status = useContext(AuthStatusContext)
+  const navigate = useNavigate()
 
   const loginBthHandler = () => {
     value.changeActive('LoginWindowActive')
-    visibility.changeAuthVisibility('')
+    auth_visibility.changeAuthVisibility('')
   }
 
   const regBthHandler = () => {
     value.changeActive('RegWindowActive')
-    visibility.changeAuthVisibility('')
+    auth_visibility.changeAuthVisibility('')
   }
 
   const logoutBthHandler = () => {
@@ -28,11 +31,15 @@ export const ProfileBar = () => {
       .catch()
   }
 
+  const newPostBthHandler = () => {
+    navigate('/create_post')
+  }
+
   return (
     <div className='profileCont'>
       {session_status.authStatus === true &&
         <div className='profileBar'>
-          <Button id='newPostBtn' title='New post'></Button>
+          <Button id='newPostBtn' title='New post' onClick={newPostBthHandler}></Button>
           <Button id='logoutBtn' onClick={logoutBthHandler}>Выйти</Button>
         </div>
       }
