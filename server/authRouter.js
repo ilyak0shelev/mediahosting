@@ -21,7 +21,7 @@ router.get('/check_session', (req, res) => {
 router.get('/logout', (req, res) => {
     res.clearCookie(this.cookie);
     req.session.destroy(() => {
-        res.redirect('/')})
+        res.send('Success')})
 })
 
 router.post('/login', (req, res) => {
