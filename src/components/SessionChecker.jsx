@@ -11,18 +11,16 @@ const SessionChecker = () => {
         axios.get('/auth/check_session')
         .then((result) => {
             if (result.data.authorized) {
-                status.changeAuthStatus(true)
-                console.log('authorized')
+                status.changeAuthStatus(result.data)
             } else {
-                status.changeAuthStatus(false)
-                console.log('Not authorized')
+                status.changeAuthStatus(result.data)
             }
         })
         .catch((error) => console.log(error))
     }, [])
 
     useEffect(() => {
-        if (!status.authStatus) {
+        if (!status.authStatus.authorized) {
             navigate('/')
         }
     }, [navigate, status])

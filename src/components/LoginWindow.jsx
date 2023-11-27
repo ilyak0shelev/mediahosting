@@ -185,8 +185,12 @@ const LoginWindow = () => {
         .then((res) => {
             switch (res.data) {
                 case 'Success':
-                    session_status.changeAuthStatus(true)
-                    closeWindow()
+                    axios.get('/auth/check_session')
+                    .then((result) => {
+                        session_status.changeAuthStatus(result.data)
+                        console.log(session_status.authStatus)
+                        closeWindow()
+                    })
                     break
                 case 'Incorrect password':
                     setPswdAuthError('Неправильный пароль!')
@@ -209,8 +213,12 @@ const LoginWindow = () => {
         .then((res) => {
             switch (res.data) {
                 case 'Success':
-                    session_status.changeAuthStatus(true)
-                    closeWindow()
+                    axios.get('/auth/check_session')
+                    .then((result) => {
+                        session_status.changeAuthStatus(result.data)
+                        console.log(session_status.authStatus)
+                        closeWindow()
+                    })
                     break
                 case 'User exists':
                     setNickRegError('Аккаунт уже существует!')

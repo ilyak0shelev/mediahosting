@@ -23,7 +23,6 @@
     justify-content: center;
     align-items: center;
     flex-flow: row wrap;
-    width: 100%;
     height: 70%;
 }
 
@@ -33,6 +32,15 @@
     width: 400px;
     border-radius: 20px;
     display: flex;
+    transition: 0.3s all;
+    border: 2px solid transparent;
+}
+
+.uploadField:hover {
+    border-radius: 35px;
+    border: 2px solid rgba(176, 135, 214, 0.342);
+    /* background-color: rgba(176, 135, 214, 0.4); */
+    background-color: rgba(179, 176, 176, 0.7);
 }
 
 .fileInput {
@@ -42,4 +50,65 @@
 .fileLabel {
     width: 100%;
     height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column wrap;
+}
+
+.fileExplanation {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column wrap;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 8px;
+    text-align: center;
+}
+
+.newPostDescriptionCont {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    height: 70%;
+}
+
+.descriptionForm {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-flow: column wrap;
+    width: 320px;
+}
+
+.newPostInput {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: row nowrap;
+    border: none;
+    border-bottom: 2px solid rgba(176, 135, 214, 0.7);
+    margin: 5%;
+    padding: 3%;
+    transition: 0.3s;
+    height: 100px;
+    word-break: break-all;
+    outline: none;
+    resize: none;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: red;
+}
+
+.newPostInput:hover {
+    border-radius: 20px;
+    box-shadow: 10px 10px 15px -2px rgba(176, 135, 214, 0.45);
+}
+
+#createBtn {
+    margin-top: 14%;
+    width: 100%;
+    height: 40px;
+    border-radius: 20px;
 }

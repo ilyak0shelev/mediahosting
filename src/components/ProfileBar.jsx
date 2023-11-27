@@ -3,7 +3,7 @@ import Button from './UI/button/Button'
 import { PageContext } from './contexts/PageContext'
 import { AuthWindowContext } from './contexts/AuthWindowContext'
 import { AuthStatusContext } from './contexts/AuthStatusContext'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import axios from 'axios'
 
@@ -37,13 +37,13 @@ export const ProfileBar = () => {
 
   return (
     <div className='profileCont'>
-      {session_status.authStatus === true &&
+      {session_status.authStatus.authorized === true &&
         <div className='profileBar'>
           <Button id='newPostBtn' title='New post' onClick={newPostBthHandler}></Button>
           <Button id='logoutBtn' onClick={logoutBthHandler}>Выйти</Button>
         </div>
       }
-      {!session_status.authStatus &&
+      {!session_status.authStatus.authorized &&
         <div className='profileBar'>
           <Button onClick={loginBthHandler}>Войти</Button>
           <Button onClick={regBthHandler}>Регистрация</Button>

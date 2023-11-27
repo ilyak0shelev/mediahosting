@@ -3,7 +3,10 @@ import { createContext, useState } from "react";
 const AuthStatusContext = createContext()
 
 function AuthStatusProvider ({children}) {
-    const [authStatus, setAuthStatus] = useState('initial')
+    const [authStatus, setAuthStatus] = useState({
+        authorized: 'initial',
+        login: 'initial',
+    })
 
     const changeAuthStatus = (value) => {
         setAuthStatus(value)

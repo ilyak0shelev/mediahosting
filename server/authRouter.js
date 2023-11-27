@@ -3,6 +3,8 @@ const router = new Router()
 const User = require('./models/user')
 const session = require('express-session')
 const bcrypt = require('bcryptjs')
+const fs = require('fs');
+const path = require('path')
 
 router.use(
     session({
@@ -56,8 +58,9 @@ router.post('/registration', (req, res) => {
             user.save()
             .then(() => {
                 res.cookie('nickname', nickname, { secure: true })
-                req.session.login = req.body.nickname
+                req.session.login = nickname
                 req.session.authorized = true
+                fs.mkdirSync(path.resolve(__dirname + `/storage/${nickname}`))
                 res.send('Success')
                 })
             .catch((error) => res.status(400).send(error))  
