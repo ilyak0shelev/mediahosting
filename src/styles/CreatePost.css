@@ -5,6 +5,7 @@
     align-items: center;
     justify-content: top;
     flex-flow: column nowrap;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .newPostTitleCont {
@@ -93,22 +94,61 @@
     margin: 5%;
     padding: 3%;
     transition: 0.3s;
-    height: 100px;
+    height: 90px;
     word-break: break-all;
     outline: none;
     resize: none;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    color: red;
 }
 
 .newPostInput:hover {
-    border-radius: 20px;
+    border-radius: 10px;
     box-shadow: 10px 10px 15px -2px rgba(176, 135, 214, 0.45);
 }
 
 #createBtn {
-    margin-top: 14%;
+    margin-top: 5%;
     width: 100%;
     height: 40px;
     border-radius: 20px;
+}
+
+.newPostInput::-webkit-scrollbar {
+    width: 12px;
+}
+
+.newPostInput::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.newPostInput::-webkit-scrollbar-thumb {
+    background-color: rgba(176, 135, 214, 0.45);
+    border-radius: 20px;
+    border: 3px solid rgba(176, 135, 214, 0.45);
+
+}
+
+.progessBarCont {
+    width: 100%;
+    border: 2px solid rgba(176, 135, 214, 0.45);
+    border-radius: 20px;
+}
+
+.progessBar {
+    height: 1rem;
+    width: 0%;
+    background-color: rgba(105, 207, 165, 0.45);
+    border-radius: 20px;
+    padding:2px;
+}
+
+.publishedAlert {
+    border: 2px solid rgba(176, 135, 214, 0.45);
+    background-color: rgba(176, 135, 214, 0.35);
+    border-radius: 20px;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    position: sticky;
+    top: 90%;
 }
