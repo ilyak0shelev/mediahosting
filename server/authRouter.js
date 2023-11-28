@@ -1,20 +1,9 @@
 const Router = require('express');
 const router = new Router()
 const User = require('./models/user')
-const session = require('express-session')
 const bcrypt = require('bcryptjs')
 const fs = require('fs');
 const path = require('path')
-
-router.use(
-    session({
-        cookie: {
-            sameSite: 'strict'
-        },
-        secret: 'Gz10FhNcyZ',
-        saveUninitialized: true,
-    })
-)
 
 router.get('/check_session', (req, res) => {
     res.send({login: req.session.login, authorized: req.session.authorized})
