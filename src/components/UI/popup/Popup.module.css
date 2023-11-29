@@ -1,0 +1,10 @@
+.alert {
+    border: 2px solid rgba(176, 135, 214, 0.45);
+    background-color: rgba(176, 135, 214, 0.35);
+    border-radius: 20px;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    position: sticky;
+    top: 90%;
+}
