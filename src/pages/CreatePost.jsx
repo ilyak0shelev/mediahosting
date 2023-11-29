@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import '../styles/CreatePost.css'
 import axios from 'axios'
 import Button from '../components/UI/button/Button'
+import Popup from '../components/UI/popup/Popup'
 
 const CreatePost = () => {
-  const controller = new AbortController();
   const [file, setFile] = useState('')
   const [data, getFile] = useState({ type: "", name: "", path: "" })
   const [selected, setSelected] = useState(false)
@@ -15,16 +15,11 @@ const CreatePost = () => {
   const [descValue, setDescValue] = useState('')
   const [tagsValue, setTagsValue] = useState('')
 
-  useEffect(() => {
-    setTimeout(() => {
-      setPublished(false)
-    }, 3000)
-  }, [published])
-
   const handleFileChange = (e) => {
     setProgess(0)
     const file = e.target.files[0];
     setFile(file);
+    console.log(file)
     setSelected(true)
     const reader = new FileReader();
     reader.onloadend = () => {
@@ -33,7 +28,7 @@ const CreatePost = () => {
     reader.readAsDataURL(file);
   }
 
-  const clearForm = () => {
+  const clearLayout = () => {
     setNameValue('')
     setDescValue('')
     setTagsValue('')
@@ -50,6 +45,7 @@ const CreatePost = () => {
     formData.append('name', nameValue)
     formData.append('description', descValue)
     formData.append('tags', tagsValue)
+    
     axios.post('/post/upload', formData, {
       onUploadProgress: (ProgressEvent) => {
         let progress = Math.round(
@@ -57,17 +53,16 @@ const CreatePost = () => {
         ) + '%';
         setProgess(progress);
       },
-      signal: controller.signal
     })
       .then((res) => {
         setPublished(true)
         setPublishedMsg('Пост опубликован!')
-        clearForm()
+        clearLayout()
       })
       .catch(() => {
         setPublished(true)
         setPublishedMsg('Ой... Что-то пошло не так...')
-        clearForm()
+        clearLayout()
       })
   }
 
@@ -76,11 +71,14 @@ const CreatePost = () => {
       <div className='newPostTitleCont'>
         <h1 className='newPostTitle'>Создание поста</h1>
       </div>
+      <div className='clearBtnCont'>
+        <Button onClick={clearLayout} id='clear-btn'>Очистить макет</Button>
+      </div>
       <div className='newPostMainCont'>
-        {data.type.match('video') && <video className='uploadField' src={data.path} alt={data.name} loop controls />}
-        {data.type.match('image') && <img className='uploadField' src={data.path} alt={data.name} />}
+        {data.type.match('video') && <video className={selected ? 'uploadFieldSelected' : 'uploadField'} src={data.path} alt={data.name} loop controls />}
+        {data.type.match('image') && <img className={selected ? 'uploadFieldSelected' : 'uploadField'} src={data.path} alt={data.name} />}
         {!data.path &&
-          <div className='uploadField'>
+          <div className={selected ? 'uploadFieldSelected' : 'uploadField'}>
             <label className='fileLabel'>
               <div className='fileExplanation'>
                 <img src='/imgs/upload-2.png' alt='upload' />
@@ -100,9 +98,7 @@ const CreatePost = () => {
           </form>
         </div>
       </div>
-      {published &&
-        <div className='publishedAlert'>{publishedMsg}</div>
-      }
+      <Popup status={published} setStatus={setPublished}>{publishedMsg}</Popup>
     </div>
   )
 }
