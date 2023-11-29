@@ -22,6 +22,10 @@ const fileSchema = new Schema({
         type: String,
         required: true
     },
+    id: {
+        type: String,
+        required: true
+    },
 })
 
 const File = mongoose.model('File', fileSchema)
