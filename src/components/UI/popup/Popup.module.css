@@ -1,6 +1,6 @@
 .alert {
-    border: 2px solid rgba(176, 135, 214, 0.45);
-    background-color: rgba(176, 135, 214, 0.35);
+    border: 2px solid rgba(160, 124, 194, 0.45);
+    background-color: rgb(201, 169, 231);
     border-radius: 20px;
     padding: 10px;
     font-size: 14px;
