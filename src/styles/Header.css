@@ -104,7 +104,7 @@
     font: normal normal normal 15px/1 FontAwesome;
 }
 
-.profileCont {
+.profileBarCont {
     display: flex;
     justify-content: space-between;
     flex-flow: row nowrap;
@@ -120,6 +120,22 @@
     content: "\f067";
     font: normal normal normal 15px/1 FontAwesome;
 }
+
+#newPostBtn:active, #myProfileBtn:active {
+    transform: none;
+}
+
+#newPostBtn[data-title]:hover::after, #myProfileBtn[data-title]:hover::after {
+    content:attr(data-title);
+    position: absolute;
+    top: 5%;
+    border-radius: 15px;
+    padding: 7px;
+    background-color: black;
+    color: white;
+    font-weight: 400;
+}
+
 
 #logoutBtn {
     background-color: rgba(224, 83, 83, 0.8);

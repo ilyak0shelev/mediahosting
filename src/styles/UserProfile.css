@@ -1,0 +1,24 @@
+.profileCont {
+    display: flex;
+    width: 100vw;
+    align-items: center;
+    justify-content: flex-start;
+    flex-flow: column nowrap;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.userInfoCont {
+    margin: 30px 20px 20px 0px;
+    width: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column nowrap;
+}
+
+#profile_photo {
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    border: 2px solid rgba(176, 135, 214, 0.7);
+}
