@@ -13,6 +13,10 @@ export const ProfileBar = () => {
   const session_status = useContext(AuthStatusContext)
   const navigate = useNavigate()
 
+  const myProfileBtnHandler = () => {
+    navigate(`/profiles/${session_status.authStatus.login}`)
+  }
+
   const loginBthHandler = () => {
     value.changeActive('LoginWindowActive')
     auth_visibility.changeAuthVisibility('')
@@ -36,10 +40,11 @@ export const ProfileBar = () => {
   }
 
   return (
-    <div className='profileCont'>
+    <div className='profileBarCont'>
       {session_status.authStatus.authorized === true &&
         <div className='profileBar'>
-          <Button id='newPostBtn' title='New post' onClick={newPostBthHandler}></Button>
+          <Button id='newPostBtn' data-title='Создать пост' onClick={newPostBthHandler}></Button>
+          <Button id='myProfileBtn' data-title='Профиль' onClick={myProfileBtnHandler}>Профиль</Button>
           <Button id='logoutBtn' onClick={logoutBthHandler}>Выйти</Button>
         </div>
       }
