@@ -50,6 +50,7 @@ router.post('/registration', (req, res) => {
                 req.session.login = nickname
                 req.session.authorized = true
                 fs.mkdirSync(path.resolve(__dirname + `/storage/${nickname}`))
+                fs.mkdirSync(path.resolve(__dirname + `/storage/${nickname}/profilePhoto`))
                 res.send('Success')
                 })
             .catch((error) => res.status(400).send(error))  

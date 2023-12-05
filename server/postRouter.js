@@ -18,7 +18,8 @@ router.post('/upload', (req, res) => {
                 .then(() => res.send('Saved'))
                 .catch((error) => {
                     file.deleteOne({id}); 
-                    res.status(400).send(error)})
+                    res.status(400).send(error)
+                })
         })
         .catch((error) => res.status(400).send(error))
 })
