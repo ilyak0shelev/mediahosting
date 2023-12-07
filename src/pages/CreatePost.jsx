@@ -61,7 +61,7 @@ const CreatePost = () => {
       })
       .catch(() => {
         setPublished(true)
-        setPublishedMsg('Ой... Что-то пошло не так...')
+        setPublishedMsg('Что-то пошло не так...')
         clearLayout()
       })
   }
