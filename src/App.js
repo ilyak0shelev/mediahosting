@@ -8,6 +8,7 @@ import { AuthStatusProvider } from './components/contexts/AuthStatusContext';
 import SessionChecker from './components/SessionChecker';
 import { BrowserRouter } from 'react-router-dom';
 import AppRouter from './components/AppRouter';
+import FileReceiver from './components/FileReceiver';
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
                         <PageProvider>
                             <AuthWindowProvider>
                                 <SessionChecker />
+                                <FileReceiver />
                                 <Header />
                                 <LoginWindow />
                                 <AppRouter />
