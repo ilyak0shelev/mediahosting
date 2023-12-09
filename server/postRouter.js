@@ -1,8 +1,9 @@
-const Router = require('express');
+const Router = require('express')
 const router = new Router()
 const path = require('path')
 const File = require('./models/file')
-const crypto = require("crypto");
+const crypto = require("crypto")
+const fs = require('fs')
 
 router.post('/upload', (req, res) => {
     const { name, description, tags } = req.body
@@ -22,6 +23,19 @@ router.post('/upload', (req, res) => {
                 })
         })
         .catch((error) => res.status(400).send(error))
+})
+
+router.post('/getFiles', (req, res) => {
+    const owner = req.body.login
+    const files = new Map([])
+
+    File.find({owner})
+    .then((result) => {
+        for (let i = 0; i < result.length; i++) {
+            const data = fs.readFileSync(path.resolve(__dirname + `/storage/${owner}/${result[i].id}`))
+            files.set(result[i].id, {info: result[i], file: data})
+        }
+    })
 })
 
 module.exports = router
