@@ -6,6 +6,14 @@ const fileSchema = new Schema({
         type: String,
         required: true
     },
+    filePath: {
+        type: String,
+        required: true
+    },
+    title: {
+        type: String,
+        required: true
+    },
     description: {
         type: String,
         required: false
@@ -24,6 +32,14 @@ const fileSchema = new Schema({
     },
     id: {
         type: String,
+        required: true
+    },
+    source: {
+        type: String,
+        required: false
+    },
+    birthtime: {
+        type: Date,
         required: true
     },
 })

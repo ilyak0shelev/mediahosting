@@ -7,6 +7,7 @@ const port = process.env.PORT || 5000
 const mongoose = require('mongoose')
 const session = require('express-session')
 const fileUpload = require('express-fileupload');
+const path = require('path')
 
 app.use(
     session({
@@ -23,6 +24,8 @@ app.use(fileUpload());
 app.use("/auth", authRouter)
 app.use("/post", postRouter)
 app.use("/user", userRouter)
+
+app.use(express.static(path.resolve(__dirname + `/storage/`)))
 
 const start = () => {
         mongoose.connect(`mongodb+srv://admin:cYHpzm6K3Ooi@cluster0.q13jkdo.mongodb.net/user_data?retryWrites=true&w=majority`)

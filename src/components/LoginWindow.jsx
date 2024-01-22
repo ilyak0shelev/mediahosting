@@ -188,7 +188,6 @@ const LoginWindow = () => {
                     axios.get('/auth/check_session')
                     .then((result) => {
                         session_status.changeAuthStatus(result.data)
-                        console.log(session_status.authStatus)
                         closeWindow()
                     })
                     break
@@ -216,7 +215,6 @@ const LoginWindow = () => {
                     axios.get('/auth/check_session')
                     .then((result) => {
                         session_status.changeAuthStatus(result.data)
-                        console.log(session_status.authStatus)
                         closeWindow()
                     })
                     break

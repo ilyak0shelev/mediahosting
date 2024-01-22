@@ -11,7 +11,7 @@ const Popup = ({ status, setStatus, children }) => {
     return (
         <>
             {status &&
-                <div className={classes.alert}>{children}</div>
+                <div className={classes.alertCont}><div className={classes.alert}>{children}</div></div>
             }
         </>
     )

@@ -6,6 +6,8 @@ import { AuthStatusContext } from './contexts/AuthStatusContext'
 import { useNavigate } from 'react-router-dom'
 import useOutsideClick from './hooks/useOutsideClick'
 import axios from 'axios'
+import { useDispatch } from 'react-redux'
+import { clearStorage } from '../store/userFilesSlice'
 
 export const ProfileBar = () => {
   const value = useContext(PageContext)
@@ -13,6 +15,7 @@ export const ProfileBar = () => {
   const session_status = useContext(AuthStatusContext)
   const navigate = useNavigate()
   const { ref, isActive, setIsActive } = useOutsideClick(false);
+  const dispatch = useDispatch()
 
   const myProfileBtnHandler = () => {
     navigate(`/profiles/${session_status.authStatus.login}`)
@@ -33,6 +36,8 @@ export const ProfileBar = () => {
       .then(() => {
         session_status.changeAuthStatus(false)
         setIsActive(false)
+        dispatch(clearStorage())
+        navigate('/')
       })
       .catch()
   }
@@ -43,7 +48,7 @@ export const ProfileBar = () => {
 
   return (
     <div className='profileBarCont'>
-      {session_status.authStatus.authorized &&
+      {session_status.authStatus.authorized === true &&
         <div ref={ref} className='profileBar'>
           <Button id='newPostBtn' data-title='Создать пост' onClick={newPostBthHandler}></Button>
           <Button id='myProfileBtn' data-title='Профиль' onClick={myProfileBtnHandler}></Button>
@@ -53,8 +58,8 @@ export const ProfileBar = () => {
               <li className='menuItem'>
                 <span id='settingsBtn'>Настройки</span>
               </li>
-              <li className='menuItem'>
-                <span id='logoutBtn' onClick={logoutBthHandler}>Выйти</span>
+              <li className='menuItem' onClick={logoutBthHandler}>
+                <span id='logoutBtn'>Выйти</span>
               </li>
             </ul>
           </nav>

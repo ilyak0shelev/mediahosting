@@ -1,8 +1,12 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import '../styles/CreatePost.css'
 import axios from 'axios'
 import Button from '../components/UI/button/Button'
 import Popup from '../components/UI/popup/Popup'
+import { AuthStatusContext } from '../components/contexts/AuthStatusContext'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { addFiles } from '../store/userFilesSlice'
 
 const CreatePost = () => {
   const [file, setFile] = useState('')
@@ -15,11 +19,20 @@ const CreatePost = () => {
   const [descValue, setDescValue] = useState('')
   const [tagsValue, setTagsValue] = useState('')
 
+  const session_status = useContext(AuthStatusContext)
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (!session_status.authStatus.authorized) {
+      navigate('/')
+    }
+  }, [session_status])
+
   const handleFileChange = (e) => {
     setProgess(0)
     const file = e.target.files[0];
     setFile(file);
-    console.log(file)
     setSelected(true)
     const reader = new FileReader();
     reader.onloadend = () => {
@@ -40,12 +53,14 @@ const CreatePost = () => {
 
   const uploadFile = (e) => {
     e.preventDefault()
+    const currentDate = new Date()
     const formData = new FormData()
     formData.append('file', file);
-    formData.append('name', nameValue)
+    formData.append('title', nameValue)
     formData.append('description', descValue)
     formData.append('tags', tagsValue)
-    
+    formData.append('birthtime', currentDate)
+
     axios.post('/post/upload', formData, {
       onUploadProgress: (ProgressEvent) => {
         let progress = Math.round(
@@ -58,6 +73,9 @@ const CreatePost = () => {
         setPublished(true)
         setPublishedMsg('Пост опубликован!')
         clearLayout()
+        dispatch(addFiles({
+          id: res.data.id, name: res.data.name, title: res.data.title, description: res.data.description, tags: res.data.tags, type: res.data.type, owner: res.data.owner
+        }))
       })
       .catch(() => {
         setPublished(true)

@@ -1,8 +1,10 @@
-import {legacy_createStore, combineReducers} from "redux"
-import { mainReducer } from "./mainReducer"
+import userFilesSlice from "./userFilesSlice" 
+import { configureStore } from "@reduxjs/toolkit"
 
-const rootReducer = combineReducers({
-    files: mainReducer,
+const store = configureStore({
+    reducer: {
+        userfiles: userFilesSlice,
+    }
 })
 
-export const store = legacy_createStore(rootReducer)
+export default store

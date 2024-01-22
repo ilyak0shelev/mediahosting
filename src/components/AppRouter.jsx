@@ -4,6 +4,7 @@ import UserProfile from '../pages/UserProfile';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import ErrorPage from '../pages/ErrorPage';
 import MainPage from '../pages/MainPage';
+import PostItem from '../pages/PostItem';
 
 const AppRouter = () => {
     return (
@@ -19,6 +20,10 @@ const AppRouter = () => {
             <Route 
                 path='/profiles/:id' 
                 element={<UserProfile />} 
+            />
+            <Route 
+                path='/posts/:id' 
+                element={<PostItem />} 
             />
             <Route 
                 path='/error' 

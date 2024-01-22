@@ -20,11 +20,11 @@ const SessionChecker = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    useEffect(() => {
-        if (!status.authStatus.authorized) {
-            navigate('/')
-        }
-    }, [navigate, status])
+    // useEffect(() => {
+    //     if (!status.authStatus.authorized) {
+    //         navigate('/')
+    //     }
+    // }, [navigate, status])
 
   return null
 }

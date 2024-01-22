@@ -50,6 +50,8 @@ router.post('/registration', (req, res) => {
                 req.session.login = nickname
                 req.session.authorized = true
                 fs.mkdirSync(path.resolve(__dirname + `/storage/${nickname}`))
+                fs.mkdirSync(path.resolve(__dirname + `/storage/${nickname}/images`))
+                fs.mkdirSync(path.resolve(__dirname + `/storage/${nickname}/videos`))
                 fs.mkdirSync(path.resolve(__dirname + `/storage/${nickname}/profilePhoto`))
                 res.send('Success')
                 })
@@ -57,7 +59,7 @@ router.post('/registration', (req, res) => {
         } else {
             res.send('User exists')
         }
-    }) 
+    })
     .catch((error) => res.status(600).send(error))
 });
 
