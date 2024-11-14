@@ -4,8 +4,8 @@ const AuthStatusContext = createContext()
 
 function AuthStatusProvider ({children}) {
     const [authStatus, setAuthStatus] = useState({
-        authorized: 'initial',
-        login: 'initial',
+        authorized: '',
+        login: '',
     })
 
     const changeAuthStatus = (value) => {

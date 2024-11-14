@@ -5,31 +5,37 @@ import { Route, Routes, Navigate } from 'react-router-dom';
 import ErrorPage from '../pages/ErrorPage';
 import MainPage from '../pages/MainPage';
 import PostItem from '../pages/PostItem';
+import TempPage from '../pages/TempPage';
+import SearchResult from '../pages/SearchResult';
 
 const AppRouter = () => {
     return (
         <Routes>
-            <Route 
-                path='/' 
+            <Route
+                path='/'
                 element={<MainPage />}
             />
-            <Route 
-                path='/create_post' 
+            <Route
+                path='/create_post'
                 element={<CreatePost />}
             />
-            <Route 
-                path='/profiles/:id' 
-                element={<UserProfile />} 
+            <Route
+                path='/profiles/:id'
+                element={<UserProfile />}
             />
-            <Route 
-                path='/posts/:id' 
-                element={<PostItem />} 
+            <Route
+                path='/posts/:id'
+                element={<PostItem />}
             />
-            <Route 
-                path='/error' 
-                element={<ErrorPage />} 
+            <Route
+                path='/search/:id'
+                element={<SearchResult />}
             />
-            <Route 
+            <Route
+                path='/error'
+                element={<ErrorPage />}
+            />
+            <Route
                 path="*"
                 element={<Navigate to="/error" replace />}
             />

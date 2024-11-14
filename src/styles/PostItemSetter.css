@@ -1,0 +1,30 @@
+.vidCont {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.vidSpan {
+   position: relative;
+   right: 60%;
+   text-align: center;
+   border-radius: 0px 0px 15px 15px;
+   background-color: white;
+   color: rgb(84, 85, 85);
+   padding: 0px 5px 5px 5px;
+   font-weight: 500;
+   transition: 0.2s all;
+}
+
+.vidCont:hover > .vidSpan {
+    transform: translateY(10px);
+    border-radius: 15px;
+    padding: 5px;
+}
+
+@media (width < 510px) {
+    .vidSpan {
+        right: 65%;
+        width: 40%;
+    }
+}

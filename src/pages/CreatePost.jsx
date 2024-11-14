@@ -6,7 +6,7 @@ import Popup from '../components/UI/popup/Popup'
 import { AuthStatusContext } from '../components/contexts/AuthStatusContext'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { addFiles } from '../store/userFilesSlice'
+import { unshiftFiles } from '../store/userFilesSlice'
 
 const CreatePost = () => {
   const [file, setFile] = useState('')
@@ -17,7 +17,6 @@ const CreatePost = () => {
   const [publishedMsg, setPublishedMsg] = useState('')
   const [nameValue, setNameValue] = useState('')
   const [descValue, setDescValue] = useState('')
-  const [tagsValue, setTagsValue] = useState('')
 
   const session_status = useContext(AuthStatusContext)
   const navigate = useNavigate()
@@ -44,7 +43,6 @@ const CreatePost = () => {
   const clearLayout = () => {
     setNameValue('')
     setDescValue('')
-    setTagsValue('')
     setSelected(false)
     getFile({ type: "", name: "", path: "" })
     setFile('')
@@ -55,11 +53,12 @@ const CreatePost = () => {
     e.preventDefault()
     const currentDate = new Date()
     const formData = new FormData()
-    formData.append('file', file);
+    formData.append('file', file)
     formData.append('title', nameValue)
     formData.append('description', descValue)
-    formData.append('tags', tagsValue)
+    formData.append('tags', '')
     formData.append('birthtime', currentDate)
+    formData.append('hidden', false)
 
     axios.post('/post/upload', formData, {
       onUploadProgress: (ProgressEvent) => {
@@ -73,9 +72,7 @@ const CreatePost = () => {
         setPublished(true)
         setPublishedMsg('Пост опубликован!')
         clearLayout()
-        dispatch(addFiles({
-          id: res.data.id, name: res.data.name, title: res.data.title, description: res.data.description, tags: res.data.tags, type: res.data.type, owner: res.data.owner
-        }))
+        dispatch(unshiftFiles(res.data))
       })
       .catch(() => {
         setPublished(true)
@@ -110,7 +107,6 @@ const CreatePost = () => {
           <form className='descriptionForm' onSubmit={uploadFile}>
             <textarea value={nameValue} onChange={(e) => { setNameValue(e.target.value) }} required type='text' placeholder='Название поста...' name='postName' className='newPostInput' />
             <textarea value={descValue} onChange={(e) => { setDescValue(e.target.value) }} type='text' placeholder='Описание...' name='postDescription' className='newPostInput' />
-            <textarea value={tagsValue} onChange={(e) => { setTagsValue(e.target.value) }} type='text' placeholder='Теги...' name='postTags' className='newPostInput' />
             {selected && <div className='progessBarCont'><div className="progessBar" style={{ width: progress }}></div></div>}
             <Button disabled={!selected} id='createBtn'>Опубликовать пост</Button>
           </form>

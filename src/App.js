@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Header from './components/Header';
 import "./styles/App.css"
 import { PageProvider } from './components/contexts/PageContext';

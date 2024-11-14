@@ -1,0 +1,16 @@
+#sub_btn {
+    width: 120px;
+    height: 45px;
+    border-radius: 25px;
+    transition: 0.2s all;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    opacity: 0;
+    animation: visible 0.7s 1;
+    animation-fill-mode: forwards;
+}
+
+#sub_btn:hover {
+    width: 150px;
+}

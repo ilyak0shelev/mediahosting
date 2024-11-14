@@ -3,10 +3,10 @@ const app = express();
 const authRouter = require('./authRouter')
 const postRouter = require('./postRouter')
 const userRouter = require('./userRouter')
-const port = process.env.PORT || 5000
+const port = 5000
 const mongoose = require('mongoose')
 const session = require('express-session')
-const fileUpload = require('express-fileupload');
+const fileUpload = require('express-fileupload')
 const path = require('path')
 
 app.use(

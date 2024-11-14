@@ -42,6 +42,10 @@ const fileSchema = new Schema({
         type: Date,
         required: true
     },
+    hidden: {
+        type: Boolean,
+        required: true
+    },
 })
 
 const File = mongoose.model('File', fileSchema)
